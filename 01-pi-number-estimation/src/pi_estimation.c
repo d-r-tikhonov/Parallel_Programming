@@ -17,17 +17,6 @@ int main(int argc, char** argv)
 
     double start_time = MPI_Wtime();
 
-    if (size < 2)
-    {
-        if (rank == 0)
-        {
-            printf("Error! The program needs at least 2 processes to work...\n");
-        }
-
-        MPI_Finalize();
-        return 1;
-    }
-
     double step = 1.0 / (double)MAX_ITERATIONS_AMOUNT;
     double x    = 0.0;
     double sum  = 0.0;
