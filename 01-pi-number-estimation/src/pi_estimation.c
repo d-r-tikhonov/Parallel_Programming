@@ -15,7 +15,11 @@ int main(int argc, char** argv)
 
     double pi = 0.0;
 
-    double start_time = MPI_Wtime();
+    double start_time = 0.0;
+    double end_time   = 0.0;
+
+    if (rank == 0)
+        start_time = MPI_Wtime();
 
     double step = 1.0 / (double)MAX_ITERATIONS_AMOUNT;
     double x    = 0.0;
@@ -34,7 +38,7 @@ int main(int argc, char** argv)
     {
         pi = global_sum * step;
 
-        double end_time = MPI_Wtime();
+        end_time = MPI_Wtime();
 
         printf("Calculated Pi = %.16f\n", pi);
         printf("Error = %.16f\n", pi - 3.14159265358979323846);
