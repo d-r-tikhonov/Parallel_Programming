@@ -15,7 +15,7 @@ typedef struct
     int* array;
     int left;
     int right;
-} thread_data;
+} thread_data_t;
 
 void swap(int* a, int* b)
 {
@@ -60,7 +60,7 @@ void sequential_qsort(int* array, int left, int right)
 
 void* parallel_qsort(void* arg)
 {  
-    thread_data* data = (thread_data*) arg;
+    thread_data_t* data = (thread_data_t*) arg;
 
     if ((data->right - data->left) <= THREAD_THRESHOLD)
     {
@@ -70,11 +70,11 @@ void* parallel_qsort(void* arg)
     {
         int pivot = partition(data->array, data->left, data->right);
 
-        thread_data* left_args  = (thread_data*) calloc(1, sizeof(thread_data));
-        thread_data* right_args = (thread_data*) calloc(1, sizeof(thread_data));
+        thread_data_t* left_args  = (thread_data_t*) calloc(1, sizeof(thread_data_t));
+        thread_data_t* right_args = (thread_data_t*) calloc(1, sizeof(thread_data_t));
 
-        *left_args  = (thread_data) {data->array, data->left, pivot - 1};
-        *right_args = (thread_data) {data->array, pivot + 1, data->right};
+        *left_args  = (thread_data_t) {data->array, data->left, pivot - 1};
+        *right_args = (thread_data_t) {data->array, pivot + 1, data->right};
 
         pthread_t left_thread;
         pthread_create(&left_thread, NULL, parallel_qsort, left_args);
@@ -159,7 +159,7 @@ int main(int argc, char* argv[])
         }
     
         start = clock();
-        thread_data args = {array, 0, array_size - 1};
+        thread_data_t args = {array, 0, array_size - 1};
         parallel_qsort(&args);
         end = clock();
     
