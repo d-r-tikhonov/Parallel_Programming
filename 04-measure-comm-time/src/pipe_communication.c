@@ -35,7 +35,7 @@ int main()
         clock_t end = clock();
         close(pipefd[1]);
 
-        printf("Writing time in pipe: %f секунд\n", (double)(end - start) / CLOCKS_PER_SEC);
+        printf("Writing time in pipe: %f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
     } 
     else 
     {
@@ -53,7 +53,7 @@ int main()
         close(pipefd[0]);
 
         wait(NULL); 
-        printf("Reading time from pipe: %f секунд\n", (double)(end - start) / CLOCKS_PER_SEC);
+        printf("Reading time from pipe: %f seconds\n", (double)(end - start) / CLOCKS_PER_SEC);
     }
 
     return 0;
